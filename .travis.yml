@@ -1,0 +1,17 @@
+language: swift
+osx_image: xcode10.2
+
+cache:
+  bundler: true
+  directories:
+  - Carthage
+
+install:
+  - make install_brew carthage
+  - bundle install --path vendor/bundle
+
+script: 
+  - bundle exec fastlane scan
+
+after_success: 
+  - bundle exec slather

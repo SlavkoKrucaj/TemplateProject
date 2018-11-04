@@ -1,0 +1,19 @@
+sources:
+  include:
+    - ./TemplateProject
+templates:
+  - Carthage/Build/iOS/SwiftyMocky.framework/
+output:
+  ./TemplateProjectTests/Mocks
+args:
+  testable:
+    - TemplateProject
+  import:
+    - RxSwift
+    - RxBlocking
+  excludedSwiftLintRules:
+    - superfluous_disable_command
+    - force_cast
+    - function_body_length
+    - line_length
+    - vertical_whitespace
