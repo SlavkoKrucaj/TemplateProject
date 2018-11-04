@@ -1,0 +1,15 @@
+line_length: 130
+file_length: 1000
+type_body_length: 500
+function_body_length: 60
+function_parameter_count: 6
+opt_in_rules:
+  - empty_count
+disabled_rules:
+  - control_statement
+  - missing_docs
+  - class_delegate_protocol
+  - identifier_name
+excluded:
+  - Carthage
+  - .templates
