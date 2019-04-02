@@ -5,12 +5,16 @@ PROJECT_NAME=TemplateProject
 default: run
 
 .PHONY: run
-run: templates carthage
+run: templates sourcery carthage
 
 .PHONY: carthage
 carthage:
 	brew install carthage
 	carthage update --platform iOS
+
+.PHONY: sourcery
+sourcery:
+	brew install sourcery
 
 .PHONY: templates
 install_templates:

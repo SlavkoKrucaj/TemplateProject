@@ -3,3 +3,4 @@ github "Instagram/IGListKit" ~> 3.0
 
 github "Quick/Quick"
 github "Quick/Nimble"
+github "MakeAWishFoundation/SwiftyMocky"

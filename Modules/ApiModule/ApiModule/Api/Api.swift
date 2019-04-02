@@ -20,6 +20,22 @@ class Api {
         case empty
         case items([T])
         case multiplePage([T], HTTPRequest<T>)
+
+        var content: [T]? {
+            switch (self) {
+            case .empty: return nil
+            case .items(let items): return items
+            case .multiplePage(let items, _): return items
+            }
+        }
+
+        var firstItem: T? {
+            switch (self) {
+            case .empty: return nil
+            case .items(let items): return items.first
+            case .multiplePage(let items, _): return items.first
+            }
+        }
     }
 
     struct HTTPRequest<T> {
