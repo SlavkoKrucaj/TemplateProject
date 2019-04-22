@@ -2,18 +2,28 @@ import Foundation
 
 public typealias JsonDictionary = [String: Any]
 
-public final class Api {
+//sourcery: AutoMockable
+protocol HttpLoader {
+    func load<ResultType>(_ request: Api.HTTPRequest<ResultType>,
+                          stateCallback: @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> URLSessionTask?
+}
+
+public final class Api: HttpLoader {
     enum ApiError: Error {
         case unknown
         case generic(Int)
-        case invalidRequest
-        case parsingFailure(String)
+        case client(Int)
+        case server(Int)
+        case parsingFailure(Error)
+        case parserNotSet
+        case responseWithNoData
     }
 
-    enum Stream<T> {
+    enum ResponseStream<T> {
         case loading
-        case success(Result<T>)
-        case error(Error, HTTPRequest<T>)
+        case success(Api.Result<T>)
+        case actionableError(ApiError, Api.HTTPRequest<T>)
+        case error(ApiError)
         case offline
     }
 
@@ -25,71 +35,92 @@ public final class Api {
 
     struct HTTPRequest<T> {
         let method: String
-        let urlComponents: URLComponents
+        let url: URL
         let headers: [String: String]
         let body: Data?
         let parser: ((Data, HTTPRequest<T>) throws -> Result<T>)?
 
-        static func get(components: URLComponents,
+        static func get(url: URL,
                         headers: [String: String] = [:],
-                        parser: ((Data, HTTPRequest<T>) -> Result<T>)? = nil) -> HTTPRequest {
-            return HTTPRequest(method: "GET", urlComponents: components, headers: headers, body: nil, parser: parser)
+                        parser: ((Data, HTTPRequest<T>) throws -> Result<T>)? = nil) -> HTTPRequest {
+            return HTTPRequest(method: "GET", url: url, headers: headers, body: nil, parser: parser)
         }
 
         private init(method: String,
-                     urlComponents: URLComponents,
+                     url: URL,
                      headers: [String: String] = [:],
                      body: Data? = nil,
-                     parser: ((Data, HTTPRequest<T>) -> Result<T>)? = nil) {
+                     parser: ((Data, HTTPRequest<T>) throws -> Result<T>)? = nil) {
             self.method = method
-            self.urlComponents = urlComponents
+            self.url = url
             self.headers = headers
             self.body = body
             self.parser = parser
         }
     }
 
-    func load<T>(_ request: HTTPRequest<T>, stateCallback: @escaping ((Stream<T>) -> Void)) -> URLSessionTask? {
-        guard let urlRequest = self.request(urlComponents: request.urlComponents,
-                                            method: request.method,
-                                            headers: request.headers,
-                                            body: request.body) else {
-            stateCallback(Stream.error(ApiError.invalidRequest, request))
-            return nil
-        }
+    private let requestFactory: UrlRequestFactory
+
+    init(requestFactory: UrlRequestFactory) {
+        self.requestFactory = requestFactory
+    }
+
+    func load<T>(_ request: HTTPRequest<T>, stateCallback: @escaping ((ResponseStream<T>) -> Void)) -> URLSessionTask? {
+        let urlRequest = self.requestFactory.request(url: request.url,
+                                                           method: request.method,
+                                                           headers: request.headers,
+                                                           body: request.body)
         stateCallback(.loading)
-        //swiftlint:disable force_try
         let sessionTask = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
-            if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.statusCode >= 200,
-                httpResponse.statusCode < 300,
-                let data = data.flatMap({ data in try! request.parser?(data, request) }) {
-                stateCallback(.success(data))
+            if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.isSuccess {
+                if let data = data {
+                    stateCallback(data.parse(with: request))
+                } else {
+                    stateCallback(.success(.empty))
+                }
+            } else if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.isClientError {
+                stateCallback(ResponseStream.error(ApiError.client(httpResponse.statusCode)))
+            } else if let httpResponse = urlResponse as? HTTPURLResponse, httpResponse.isServerError {
+                stateCallback(ResponseStream.actionableError(ApiError.server(httpResponse.statusCode), request))
             } else if let error = error as NSError? {
                 if (error.code == NSURLErrorNotConnectedToInternet ) {
                     stateCallback(.offline)
                 } else {
-                    stateCallback(Stream.error(ApiError.generic(error.code), request))
+                    stateCallback(ResponseStream.actionableError(ApiError.generic(error.code), request))
                 }
             } else {
-                stateCallback(Stream.error(ApiError.unknown, request))
+                stateCallback(ResponseStream.actionableError(ApiError.unknown, request))
             }
         }
-        //swiftlint:enable force_try
         sessionTask.resume()
         return sessionTask
     }
+}
 
-    private func request(urlComponents: URLComponents,
-                         method: String,
-                         headers: [String: String] = [:],
-                         body: Data? = nil) -> URLRequest? {
-        guard let url = urlComponents.url, !url.absoluteString.isEmpty else {
-            return nil
+private extension Data {
+    func parse<T>(with request: Api.HTTPRequest<T>) -> Api.ResponseStream<T> {
+        guard let parser = request.parser else {
+            return .error(.parserNotSet)
         }
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = method
-        urlRequest.allHTTPHeaderFields = headers
-        urlRequest.httpBody = body
-        return urlRequest
+
+        do {
+            return .success(try parser(self, request))
+        } catch {
+            return .error(.parsingFailure(error))
+        }
+    }
+}
+
+private extension HTTPURLResponse {
+    var isSuccess: Bool {
+        return statusCode >= 200 && statusCode < 300
+    }
+
+    var isClientError: Bool {
+        return statusCode >= 400 && statusCode < 500
+    }
+
+    var isServerError: Bool {
+        return statusCode >= 500 && statusCode < 600
     }
 }

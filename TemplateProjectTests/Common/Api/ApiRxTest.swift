@@ -3,17 +3,19 @@ import XCTest
 @testable import TemplateProject
 import Quick
 import Nimble
-import OHHTTPStubs
+import RxSwift
 import SwiftyMocky
+import OHHTTPStubs
 
 //swiftlint:disable line_length
 //swiftlint:disable function_body_length
 
-class ApiTest: QuickSpec {
+class ApiRxTest: QuickSpec {
     override func spec() {
         var subject: Api!
         var requestFactory: UrlRequestFactoryMock!
 
+        let disposeBag = DisposeBag()
         let exampleUrl = URL(string: "https://www.example.com")!
 
         beforeEach {
@@ -38,16 +40,14 @@ class ApiTest: QuickSpec {
                             let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl)
 
                             it("should propagate loading and correct error", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
-                                    .loading,
-                                    .error(.parserNotSet)
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.error(.parserNotSet)),
+                                    .completed
                                 ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
                         })
 
@@ -57,16 +57,14 @@ class ApiTest: QuickSpec {
                             })
 
                             it("should propagate loading and content state", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
-                                    .loading,
-                                    .success(.empty)
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.success(.empty)),
+                                    .completed
                                 ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
                         })
 
@@ -76,16 +74,14 @@ class ApiTest: QuickSpec {
                             })
 
                             it("should propagate loading and error state", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
-                                    .loading,
-                                    .error(Api.ApiError.parsingFailure(TestError.test))
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.error(Api.ApiError.parsingFailure(TestError.test))),
+                                    .completed
                                 ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
                         })
 
@@ -106,13 +102,14 @@ class ApiTest: QuickSpec {
                             }
 
                             it("should propagate loading and offline state", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [.loading, .offline])
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.offline),
+                                    .completed
+                                ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
 
                             afterEach {
@@ -129,13 +126,14 @@ class ApiTest: QuickSpec {
                             }
 
                             it("should propagate loading and generic error", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [.loading, .actionableError(.generic(NSURLErrorTimedOut), request)])
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.actionableError(.generic(NSURLErrorTimedOut), request)),
+                                    .completed
+                                ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
 
                             afterEach {
@@ -151,16 +149,14 @@ class ApiTest: QuickSpec {
                             }
 
                             it("should propagate loading and client error", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
-                                    .loading,
-                                    .error(Api.ApiError.client(404))
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.error(.client(404))),
+                                    .completed
                                 ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
 
                             afterEach {
@@ -176,16 +172,14 @@ class ApiTest: QuickSpec {
                             }
 
                             it("should propagate loading and server error", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
-                                    .loading,
-                                    .actionableError(Api.ApiError.server(500), request)
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.actionableError(.server(500), request)),
+                                    .completed
                                 ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
 
                             afterEach {
@@ -201,14 +195,14 @@ class ApiTest: QuickSpec {
                             }
 
                             it("should propagate loading and unknown error", closure: {
-                                let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
-                                    .loading,
-                                    .actionableError(Api.ApiError.unknown, request)
-                                ])
-                                _ = subject.load(request, stateCallback: { state in
-                                    recorder.verify(state)
-                                })
-                                self.wait(for: [recorder.expectation], timeout: 5)
+                                let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
+                                    .next(.loading),
+                                    .next(.actionableError(.unknown, request)),
+                                    .completed
+                                    ])
+                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+
+                                self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
 
                             afterEach {

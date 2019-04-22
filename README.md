@@ -19,3 +19,17 @@ You should enable [Travis-CI](https://travis-ci.com) and [Coveralls](https://cov
 
 There are two templates that contain most of the boilerplate code for creating two types of screens. `Basic` for plain custom views with custom design. `Infinite List` for displaying content inside of a collection view. They both follow `VIPER` architecture pattern.
 
+
+## TODO
+
+  - we should mock the session for the test
+  - add tests for api
+  - add tests for rx things
+  
+  - add tests for the other things
+  
+  - fix both templates
+  - add analytics
+
+  - integrate with fastlane match
+
