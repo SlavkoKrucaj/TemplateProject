@@ -1,7 +1,7 @@
 import Foundation
 import IGListKit
 
-class EmptyModel: NSObject, ListDiffable {
+public class EmptyModel: NSObject, ListDiffable {
     let title: String
     let message: String
 
@@ -10,11 +10,11 @@ class EmptyModel: NSObject, ListDiffable {
         self.message = message
     }
 
-    func diffIdentifier() -> NSObjectProtocol {
+    public func diffIdentifier() -> NSObjectProtocol {
         return self
     }
 
-    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+    public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         return isEqual(object)
     }
 }

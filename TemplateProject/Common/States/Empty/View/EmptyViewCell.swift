@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
 
-class EmptyViewCell: UICollectionViewCell {
-    var inset: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+public final class EmptyViewCell: UICollectionViewCell {
+    private var inset: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         let stackView = self.stackView
 
@@ -33,7 +33,7 @@ class EmptyViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var image: UIImage? {
+    public var image: UIImage? {
         get {
             return imageView.image
         }
@@ -42,7 +42,7 @@ class EmptyViewCell: UICollectionViewCell {
         }
     }
 
-    var title: String? {
+    public var title: String? {
         get {
             return titleLabel.text
         }
@@ -51,7 +51,7 @@ class EmptyViewCell: UICollectionViewCell {
         }
     }
 
-    var message: String? {
+    public var message: String? {
         get {
             return messageLabel.text
         }
@@ -60,14 +60,14 @@ class EmptyViewCell: UICollectionViewCell {
         }
     }
 
-    fileprivate let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.heightAnchor.constraint(equalToConstant: 42.0).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 42.0).isActive = true
         return imageView
     }()
 
-    fileprivate lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
@@ -78,7 +78,7 @@ class EmptyViewCell: UICollectionViewCell {
         return label
     }()
 
-    fileprivate let messageLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textAlignment = .center
@@ -88,7 +88,7 @@ class EmptyViewCell: UICollectionViewCell {
         return label
     }()
 
-    fileprivate lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView   = UIStackView()
 
         stackView.axis  = NSLayoutConstraint.Axis.vertical

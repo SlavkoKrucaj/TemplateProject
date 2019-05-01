@@ -3,8 +3,8 @@ import UIKit
 
 import IGListKit
 
-final class LoadingItemController {
-    static func controller(height: CGFloat? = nil) -> ListSingleSectionController {
+final public class LoadingItemController {
+    static public func controller(height: CGFloat? = nil) -> ListSingleSectionController {
         let configureBlock = { (item: Any, cell: UICollectionViewCell) in
             if let cell = cell as? LoadingSpinnerCell {
                 cell.activityIndicator.startAnimating()

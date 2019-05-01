@@ -214,6 +214,299 @@ open class HttpLoaderMock: HttpLoader, Mock {
     }
 }
 
+// MARK: - StateProvider
+open class StateProviderMock: StateProvider, Mock {
+    init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {
+        self.sequencingPolicy = sequencingPolicy
+        self.stubbingPolicy = stubbingPolicy
+        self.file = file
+        self.line = line
+    }
+
+    var matcher: Matcher = Matcher.default
+    var stubbingPolicy: StubbingPolicy = .wrap
+    var sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst
+    private var invocations: [MethodType] = []
+    private var methodReturnValues: [Given] = []
+    private var methodPerformValues: [Perform] = []
+    private var file: StaticString?
+    private var line: UInt?
+
+    public typealias PropertyStub = Given
+    public typealias MethodStub = Given
+    public typealias SubscriptStub = Given
+
+    /// Convenience method - call setupMock() to extend debug information when failure occurs
+    public func setupMock(file: StaticString = #file, line: UInt = #line) {
+        self.file = file
+        self.line = line
+    }
+
+
+
+
+
+    open func empty(title: String, message: String) -> EmptyModel {
+        addInvocation(.m_empty__title_titlemessage_message(Parameter<String>.value(`title`), Parameter<String>.value(`message`)))
+		let perform = methodPerformValue(.m_empty__title_titlemessage_message(Parameter<String>.value(`title`), Parameter<String>.value(`message`))) as? (String, String) -> Void
+		perform?(`title`, `message`)
+		var __value: EmptyModel
+		do {
+		    __value = try methodReturnValue(.m_empty__title_titlemessage_message(Parameter<String>.value(`title`), Parameter<String>.value(`message`))).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for empty(title: String, message: String). Use given")
+			Failure("Stub return value not specified for empty(title: String, message: String). Use given")
+		}
+		return __value
+    }
+
+    open func loading() -> LoadingModel {
+        addInvocation(.m_loading)
+		let perform = methodPerformValue(.m_loading) as? () -> Void
+		perform?()
+		var __value: LoadingModel
+		do {
+		    __value = try methodReturnValue(.m_loading).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for loading(). Use given")
+			Failure("Stub return value not specified for loading(). Use given")
+		}
+		return __value
+    }
+
+    open func offline(imageName: String, title: String, message: String) -> OfflineModel {
+        addInvocation(.m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`title`), Parameter<String>.value(`message`)))
+		let perform = methodPerformValue(.m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`title`), Parameter<String>.value(`message`))) as? (String, String, String) -> Void
+		perform?(`imageName`, `title`, `message`)
+		var __value: OfflineModel
+		do {
+		    __value = try methodReturnValue(.m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`title`), Parameter<String>.value(`message`))).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for offline(imageName: String, title: String, message: String). Use given")
+			Failure("Stub return value not specified for offline(imageName: String, title: String, message: String). Use given")
+		}
+		return __value
+    }
+
+    open func loadMore<T>(request: Api.Request<T>) -> LoadMoreModel<T> {
+        addInvocation(.m_loadMore__request_request(Parameter<Api.Request<T>>.value(`request`).wrapAsGeneric()))
+		let perform = methodPerformValue(.m_loadMore__request_request(Parameter<Api.Request<T>>.value(`request`).wrapAsGeneric())) as? (Api.Request<T>) -> Void
+		perform?(`request`)
+		var __value: LoadMoreModel<T>
+		do {
+		    __value = try methodReturnValue(.m_loadMore__request_request(Parameter<Api.Request<T>>.value(`request`).wrapAsGeneric())).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for loadMore<T>(request: Api.Request<T>). Use given")
+			Failure("Stub return value not specified for loadMore<T>(request: Api.Request<T>). Use given")
+		}
+		return __value
+    }
+
+    open func error(imageName: String, message: String) -> ErrorModel {
+        addInvocation(.m_error__imageName_imageNamemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`message`)))
+		let perform = methodPerformValue(.m_error__imageName_imageNamemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`message`))) as? (String, String) -> Void
+		perform?(`imageName`, `message`)
+		var __value: ErrorModel
+		do {
+		    __value = try methodReturnValue(.m_error__imageName_imageNamemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`message`))).casted()
+		} catch {
+			onFatalFailure("Stub return value not specified for error(imageName: String, message: String). Use given")
+			Failure("Stub return value not specified for error(imageName: String, message: String). Use given")
+		}
+		return __value
+    }
+
+
+    fileprivate enum MethodType {
+        case m_empty__title_titlemessage_message(Parameter<String>, Parameter<String>)
+        case m_loading
+        case m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>, Parameter<String>, Parameter<String>)
+        case m_loadMore__request_request(Parameter<GenericAttribute>)
+        case m_error__imageName_imageNamemessage_message(Parameter<String>, Parameter<String>)
+
+        static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+            switch (lhs, rhs) {
+            case (.m_empty__title_titlemessage_message(let lhsTitle, let lhsMessage), .m_empty__title_titlemessage_message(let rhsTitle, let rhsMessage)):
+                guard Parameter.compare(lhs: lhsTitle, rhs: rhsTitle, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsMessage, rhs: rhsMessage, with: matcher) else { return false } 
+                return true 
+            case (.m_loading, .m_loading):
+                return true 
+            case (.m_offline__imageName_imageNametitle_titlemessage_message(let lhsImagename, let lhsTitle, let lhsMessage), .m_offline__imageName_imageNametitle_titlemessage_message(let rhsImagename, let rhsTitle, let rhsMessage)):
+                guard Parameter.compare(lhs: lhsImagename, rhs: rhsImagename, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsTitle, rhs: rhsTitle, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsMessage, rhs: rhsMessage, with: matcher) else { return false } 
+                return true 
+            case (.m_loadMore__request_request(let lhsRequest), .m_loadMore__request_request(let rhsRequest)):
+                guard Parameter.compare(lhs: lhsRequest, rhs: rhsRequest, with: matcher) else { return false } 
+                return true 
+            case (.m_error__imageName_imageNamemessage_message(let lhsImagename, let lhsMessage), .m_error__imageName_imageNamemessage_message(let rhsImagename, let rhsMessage)):
+                guard Parameter.compare(lhs: lhsImagename, rhs: rhsImagename, with: matcher) else { return false } 
+                guard Parameter.compare(lhs: lhsMessage, rhs: rhsMessage, with: matcher) else { return false } 
+                return true 
+            default: return false
+            }
+        }
+
+        func intValue() -> Int {
+            switch self {
+            case let .m_empty__title_titlemessage_message(p0, p1): return p0.intValue + p1.intValue
+            case .m_loading: return 0
+            case let .m_offline__imageName_imageNametitle_titlemessage_message(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case let .m_loadMore__request_request(p0): return p0.intValue
+            case let .m_error__imageName_imageNamemessage_message(p0, p1): return p0.intValue + p1.intValue
+            }
+        }
+    }
+
+    open class Given: StubbedMethod {
+        fileprivate var method: MethodType
+
+        private init(method: MethodType, products: [StubProduct]) {
+            self.method = method
+            super.init(products)
+        }
+
+
+        public static func empty(title: Parameter<String>, message: Parameter<String>, willReturn: EmptyModel...) -> MethodStub {
+            return Given(method: .m_empty__title_titlemessage_message(`title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func loading(willReturn: LoadingModel...) -> MethodStub {
+            return Given(method: .m_loading, products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>, willReturn: OfflineModel...) -> MethodStub {
+            return Given(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func loadMore<T>(request: Parameter<Api.Request<T>>, willReturn: LoadMoreModel<T>...) -> MethodStub {
+            return Given(method: .m_loadMore__request_request(`request`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func error(imageName: Parameter<String>, message: Parameter<String>, willReturn: ErrorModel...) -> MethodStub {
+            return Given(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        }
+        public static func empty(title: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<EmptyModel>) -> Void) -> MethodStub {
+            let willReturn: [EmptyModel] = []
+			let given: Given = { return Given(method: .m_empty__title_titlemessage_message(`title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (EmptyModel).self)
+			willProduce(stubber)
+			return given
+        }
+        public static func loading(willProduce: (Stubber<LoadingModel>) -> Void) -> MethodStub {
+            let willReturn: [LoadingModel] = []
+			let given: Given = { return Given(method: .m_loading, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (LoadingModel).self)
+			willProduce(stubber)
+			return given
+        }
+        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<OfflineModel>) -> Void) -> MethodStub {
+            let willReturn: [OfflineModel] = []
+			let given: Given = { return Given(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (OfflineModel).self)
+			willProduce(stubber)
+			return given
+        }
+        public static func loadMore<T>(request: Parameter<Api.Request<T>>, willProduce: (Stubber<LoadMoreModel<T>>) -> Void) -> MethodStub {
+            let willReturn: [LoadMoreModel<T>] = []
+			let given: Given = { return Given(method: .m_loadMore__request_request(`request`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (LoadMoreModel<T>).self)
+			willProduce(stubber)
+			return given
+        }
+        public static func error(imageName: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<ErrorModel>) -> Void) -> MethodStub {
+            let willReturn: [ErrorModel] = []
+			let given: Given = { return Given(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let stubber = given.stub(for: (ErrorModel).self)
+			willProduce(stubber)
+			return given
+        }
+    }
+
+    public struct Verify {
+        fileprivate var method: MethodType
+
+        public static func empty(title: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_empty__title_titlemessage_message(`title`, `message`))}
+        public static func loading() -> Verify { return Verify(method: .m_loading)}
+        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`))}
+        public static func loadMore<T>(request: Parameter<Api.Request<T>>) -> Verify { return Verify(method: .m_loadMore__request_request(`request`.wrapAsGeneric()))}
+        public static func error(imageName: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`))}
+    }
+
+    public struct Perform {
+        fileprivate var method: MethodType
+        var performs: Any
+
+        public static func empty(title: Parameter<String>, message: Parameter<String>, perform: @escaping (String, String) -> Void) -> Perform {
+            return Perform(method: .m_empty__title_titlemessage_message(`title`, `message`), performs: perform)
+        }
+        public static func loading(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_loading, performs: perform)
+        }
+        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>, perform: @escaping (String, String, String) -> Void) -> Perform {
+            return Perform(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`), performs: perform)
+        }
+        public static func loadMore<T>(request: Parameter<Api.Request<T>>, perform: @escaping (Api.Request<T>) -> Void) -> Perform {
+            return Perform(method: .m_loadMore__request_request(`request`.wrapAsGeneric()), performs: perform)
+        }
+        public static func error(imageName: Parameter<String>, message: Parameter<String>, perform: @escaping (String, String) -> Void) -> Perform {
+            return Perform(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`), performs: perform)
+        }
+    }
+
+    public func given(_ method: Given) {
+        methodReturnValues.append(method)
+    }
+
+    public func perform(_ method: Perform) {
+        methodPerformValues.append(method)
+        methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+    }
+
+    public func verify(_ method: Verify, count: Count = Count.moreOrEqual(to: 1), file: StaticString = #file, line: UInt = #line) {
+        let invocations = matchingCalls(method.method)
+        MockyAssert(count.matches(invocations.count), "Expected: \(count) invocations of `\(method.method)`, but was: \(invocations.count)", file: file, line: line)
+    }
+
+    private func addInvocation(_ call: MethodType) {
+        invocations.append(call)
+    }
+    private func methodReturnValue(_ method: MethodType) throws -> StubProduct {
+        let candidates = sequencingPolicy.sorted(methodReturnValues, by: { $0.method.intValue() > $1.method.intValue() })
+        let matched = candidates.first(where: { $0.isValid && MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) })
+        guard let product = matched?.getProduct(policy: self.stubbingPolicy) else { throw MockError.notStubed }
+        return product
+    }
+    private func methodPerformValue(_ method: MethodType) -> Any? {
+        let matched = methodPerformValues.reversed().first { MethodType.compareParameters(lhs: $0.method, rhs: method, matcher: matcher) }
+        return matched?.performs
+    }
+    private func matchingCalls(_ method: MethodType) -> [MethodType] {
+        return invocations.filter { MethodType.compareParameters(lhs: $0, rhs: method, matcher: matcher) }
+    }
+    private func matchingCalls(_ method: Verify) -> Int {
+        return matchingCalls(method.method).count
+    }
+    private func givenGetterValue<T>(_ method: MethodType, _ message: String) -> T {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            onFatalFailure(message)
+            Failure(message)
+        }
+    }
+    private func optionalGivenGetterValue<T>(_ method: MethodType, _ message: String) -> T? {
+        do {
+            return try methodReturnValue(method).casted()
+        } catch {
+            return nil
+        }
+    }
+    private func onFatalFailure(_ message: String) {
+        #if Mocky
+        guard let file = self.file, let line = self.line else { return } // Let if fail if cannot handle gratefully
+        SwiftyMockyTestObserver.handleMissingStubError(message: message, file: file, line: line)
+        #endif
+    }
+}
+
 // MARK: - UrlRequestFactory
 open class UrlRequestFactoryMock: UrlRequestFactory, Mock {
     init(sequencing sequencingPolicy: SequencingPolicy = .lastWrittenResolvedFirst, stubbing stubbingPolicy: StubbingPolicy = .wrap, file: StaticString = #file, line: UInt = #line) {

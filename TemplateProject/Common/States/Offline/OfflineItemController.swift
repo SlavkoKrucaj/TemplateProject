@@ -3,8 +3,8 @@ import UIKit
 
 import IGListKit
 
-final class OfflineItemController {
-    static func controller() -> ListSectionController {
+final public class OfflineItemController {
+    static public func controller() -> ListSectionController {
         let configureBlock = { (item: Any, cell: UICollectionViewCell) in
             if let cell = cell as? OfflineViewCell,
                 let item = item as? OfflineModel {

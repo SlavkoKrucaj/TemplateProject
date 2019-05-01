@@ -3,8 +3,8 @@ import UIKit
 
 import IGListKit
 
-final class EmptyItemController: ListSectionController {
-    static func controller() -> ListSectionController {
+final public class EmptyItemController: ListSectionController {
+    static public func controller() -> ListSectionController {
         let configureBlock = { (item: Any, cell: UICollectionViewCell) in
             if let cell = cell as? EmptyViewCell,
                 let item = item as? EmptyModel {

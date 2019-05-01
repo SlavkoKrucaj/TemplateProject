@@ -3,12 +3,12 @@ import UIKit
 
 import IGListKit
 
-protocol ErrorDelegate: class {
+public protocol ErrorDelegate: class {
     func reload()
 }
 
-final class ErrorItemController: ListSectionController {
-    static func controller(delegate: ErrorDelegate) -> ListSectionController {
+final public class ErrorItemController: ListSectionController {
+    static public func controller(delegate: ErrorDelegate) -> ListSectionController {
         let configureBlock = { (item: Any, cell: UICollectionViewCell) in
             if let cell = cell as? ErrorViewCell,
                 let item = item as? ErrorModel {

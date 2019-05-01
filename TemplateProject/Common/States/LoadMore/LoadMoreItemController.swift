@@ -3,12 +3,12 @@ import UIKit
 
 import IGListKit
 
-protocol LoadMoreDelegate: class {
+public protocol LoadMoreDelegate: class {
     func loadMore()
 }
 
-final class LoadMoreItemController {
-    static func controller(delegate: LoadMoreDelegate) -> ListSectionController {
+final public class LoadMoreItemController {
+    static public func controller(delegate: LoadMoreDelegate) -> ListSectionController {
         let configureBlock = { (item: Any, cell: UICollectionViewCell) in
             if let cell = cell as? LoadMoreSpinnerCell {
                 cell.activityIndicator.startAnimating()

@@ -1,9 +1,7 @@
 import Foundation
 import UIKit
 
-final class LoadMoreSpinnerCell: UICollectionViewCell {
-    var color: UIColor = .gray
-
+final public class LoadMoreSpinnerCell: UICollectionViewCell {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
         view.color = .gray
@@ -11,7 +9,7 @@ final class LoadMoreSpinnerCell: UICollectionViewCell {
         return view
     }()
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         let bounds = contentView.bounds
         activityIndicator.center = CGPoint(x: bounds.midX, y: bounds.midY)

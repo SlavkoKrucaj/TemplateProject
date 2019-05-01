@@ -3,7 +3,7 @@ import UIKit
 
 import IGListKit
 
-class ErrorModel: NSObject, ListDiffable {
+final public class ErrorModel: NSObject, ListDiffable {
     let image: String
     let message: String
 
@@ -12,11 +12,11 @@ class ErrorModel: NSObject, ListDiffable {
         self.message = message
     }
 
-    func diffIdentifier() -> NSObjectProtocol {
+    public func diffIdentifier() -> NSObjectProtocol {
         return self
     }
 
-    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+    public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         return isEqual(object)
     }
 }

@@ -384,8 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				45E75515218E228300131C9A /* ErrorItemController.swift */,
-				45E75516218E228300131C9A /* View */,
 				45E75518218E228300131C9A /* ErrorModel.swift */,
+				45E75516218E228300131C9A /* View */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -419,9 +419,9 @@
 		45E7551E218E228400131C9A /* LoadMore */ = {
 			isa = PBXGroup;
 			children = (
-				45E7551F218E228400131C9A /* View */,
 				45E75521218E228400131C9A /* LoadMoreItemController.swift */,
 				45E75522218E228400131C9A /* LoadMoreModel.swift */,
+				45E7551F218E228400131C9A /* View */,
 			);
 			path = LoadMore;
 			sourceTree = "<group>";
@@ -437,9 +437,9 @@
 		45E75523218E228400131C9A /* Loading */ = {
 			isa = PBXGroup;
 			children = (
+				45E75527218E228400131C9A /* LoadingItemController.swift */,
 				45E75524218E228400131C9A /* LoadingModel.swift */,
 				45E75525218E228400131C9A /* View */,
-				45E75527218E228400131C9A /* LoadingItemController.swift */,
 			);
 			path = Loading;
 			sourceTree = "<group>";
@@ -455,9 +455,9 @@
 		45E75528218E228400131C9A /* Offline */ = {
 			isa = PBXGroup;
 			children = (
+				45E7552C218E228400131C9A /* OfflineItemController.swift */,
 				45E75529218E228400131C9A /* OfflineModel.swift */,
 				45E7552A218E228400131C9A /* View */,
-				45E7552C218E228400131C9A /* OfflineItemController.swift */,
 			);
 			path = Offline;
 			sourceTree = "<group>";

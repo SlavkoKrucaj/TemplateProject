@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-final class LoadingSpinnerCell: UICollectionViewCell {
-    override init(frame: CGRect) {
+final public class LoadingSpinnerCell: UICollectionViewCell {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         let stackView = self.stackView
 
@@ -18,7 +18,7 @@ final class LoadingSpinnerCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    fileprivate lazy var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView   = UIStackView()
 
         stackView.axis  = NSLayoutConstraint.Axis.vertical

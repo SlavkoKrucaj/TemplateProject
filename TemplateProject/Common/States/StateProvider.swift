@@ -1,38 +1,35 @@
 import Foundation
 
-class StateProvider {
-    private let title: String
-    private let message: String
-    private let loadingMessage: String?
+//sourcery: AutoMockable
+public protocol StateProvider {
+    func empty(title: String, message: String) -> EmptyModel
+    func loading() -> LoadingModel
+    func offline(imageName: String, title: String, message: String) -> OfflineModel
+    func loadMore<T>(request: Api.Request<T>) -> LoadMoreModel<T>
+    func error(imageName: String, message: String) -> ErrorModel
+}
 
-    init(title: String? = nil,
-         message: String? = nil,
-         loadingMessage: String? = nil) {
-        self.title = title ?? "no_content_title".localized()
-        self.message = message ?? "no_content_message".localized()
-        self.loadingMessage = loadingMessage
-    }
-
-    func empty() -> EmptyModel {
-        return EmptyModel(title: self.title, message: self.message)
+struct BasicStateProvider: StateProvider {
+    func empty(title: String, message: String) -> EmptyModel {
+        return EmptyModel(title: title, message: message)
     }
 
     func loading() -> LoadingModel {
         return LoadingModel()
     }
 
-    func offline() -> OfflineModel {
-        return OfflineModel(image: "offline_icon",
-                            title: "default_offline_title".localized(),
-                            message: "default_offline_message".localized())
+    func offline(imageName: String, title: String, message: String) -> OfflineModel {
+        return OfflineModel(image: imageName,
+                            title: title,
+                            message: message)
     }
 
     func loadMore<T>(request: Api.Request<T>) -> LoadMoreModel<T> {
         return LoadMoreModel(apiRequest: request)
     }
 
-    func error() -> ErrorModel {
-        return ErrorModel(image: "warning",
-                          message: "default_error_message".localized())
+    func error(imageName: String, message: String) -> ErrorModel {
+        return ErrorModel(image: imageName,
+                          message: message)
     }
 }
