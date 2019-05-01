@@ -40,7 +40,7 @@ extension Api.ResponseStream: Equatable {
         }
     }
 
-    public static func areEqual(lhs: Api.HTTPRequest<T>, rhs: Api.HTTPRequest<T>) -> Bool {
+    public static func areEqual(lhs: Api.Request<T>, rhs: Api.Request<T>) -> Bool {
         return lhs.method == rhs.method &&
             lhs.url == rhs.url &&
             lhs.headers == rhs.headers &&
@@ -48,6 +48,19 @@ extension Api.ResponseStream: Equatable {
     }
 
     public static func areEqual<T: Equatable>(lhs: Api.Result<T>, rhs: Api.Result<T>) -> Bool {
+        switch (lhs) {
+        case .empty:
+            if case .empty = rhs { return true } else { return false }
+        case .items(let items):
+            if case .items(let lItems) = rhs { return items == lItems } else { return false }
+        case .multiplePage(let items, _):
+            if case .multiplePage(let lItems, _) = rhs { return items == lItems } else { return false }
+        }
+    }
+}
+
+extension Api.Result: Equatable where T: Equatable {
+    public static func ==<T: Equatable>(lhs: Api.Result<T>, rhs: Api.Result<T>) -> Bool {
         switch (lhs) {
         case .empty:
             if case .empty = rhs { return true } else { return false }

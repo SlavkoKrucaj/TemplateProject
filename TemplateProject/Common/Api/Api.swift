@@ -3,13 +3,13 @@ import Foundation
 public typealias JsonDictionary = [String: Any]
 
 //sourcery: AutoMockable
-protocol HttpLoader {
-    func load<ResultType>(_ request: Api.HTTPRequest<ResultType>,
+public protocol HttpLoader {
+    func load<ResultType>(_ request: Api.Request<ResultType>,
                           stateCallback: @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> URLSessionTask?
 }
 
 public final class Api: HttpLoader {
-    enum ApiError: Error {
+    public enum ApiError: Error {
         case unknown
         case generic(Int)
         case client(Int)
@@ -19,38 +19,46 @@ public final class Api: HttpLoader {
         case responseWithNoData
     }
 
-    enum ResponseStream<T> {
+    public enum ResponseStream<T> {
         case loading
-        case success(Api.Result<T>)
-        case actionableError(ApiError, Api.HTTPRequest<T>)
+        case success(Result<T>)
+        case actionableError(ApiError, Request<T>)
         case error(ApiError)
         case offline
     }
 
-    enum Result<T> {
+    public enum Result<T> {
         case empty
         case items([T])
-        case multiplePage([T], HTTPRequest<T>)
+        case multiplePage([T], Request<T>)
+
+        func unwrap() -> [T] {
+            switch (self) {
+            case .empty: return []
+            case .items(let items): return items
+            case .multiplePage(let items, _): return items
+            }
+        }
     }
 
-    struct HTTPRequest<T> {
+    public struct Request<T> {
         let method: String
         let url: URL
         let headers: [String: String]
         let body: Data?
-        let parser: ((Data, HTTPRequest<T>) throws -> Result<T>)?
+        let parser: ((Data, Request<T>) throws -> Result<T>)?
 
-        static func get(url: URL,
+        public static func get(url: URL,
                         headers: [String: String] = [:],
-                        parser: ((Data, HTTPRequest<T>) throws -> Result<T>)? = nil) -> HTTPRequest {
-            return HTTPRequest(method: "GET", url: url, headers: headers, body: nil, parser: parser)
+                        parser: ((Data, Request<T>) throws -> Result<T>)? = nil) -> Request {
+            return Request(method: "GET", url: url, headers: headers, body: nil, parser: parser)
         }
 
         private init(method: String,
                      url: URL,
                      headers: [String: String] = [:],
                      body: Data? = nil,
-                     parser: ((Data, HTTPRequest<T>) throws -> Result<T>)? = nil) {
+                     parser: ((Data, Request<T>) throws -> Result<T>)? = nil) {
             self.method = method
             self.url = url
             self.headers = headers
@@ -61,11 +69,11 @@ public final class Api: HttpLoader {
 
     private let requestFactory: UrlRequestFactory
 
-    init(requestFactory: UrlRequestFactory) {
+    public init(requestFactory: UrlRequestFactory = BasicUrlRequestFactory()) {
         self.requestFactory = requestFactory
     }
 
-    func load<T>(_ request: HTTPRequest<T>, stateCallback: @escaping ((ResponseStream<T>) -> Void)) -> URLSessionTask? {
+    public func load<T>(_ request: Request<T>, stateCallback: @escaping ((ResponseStream<T>) -> Void)) -> URLSessionTask? {
         let urlRequest = self.requestFactory.request(url: request.url,
                                                            method: request.method,
                                                            headers: request.headers,
@@ -98,7 +106,7 @@ public final class Api: HttpLoader {
 }
 
 private extension Data {
-    func parse<T>(with request: Api.HTTPRequest<T>) -> Api.ResponseStream<T> {
+    func parse<T>(with request: Api.Request<T>) -> Api.ResponseStream<T> {
         guard let parser = request.parser else {
             return .error(.parserNotSet)
         }

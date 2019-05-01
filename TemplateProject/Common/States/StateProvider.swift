@@ -27,7 +27,7 @@ class StateProvider {
                             message: "default_offline_message".localized())
     }
 
-    func loadMore<T>(request: Api.HTTPRequest<T>) -> LoadMoreModel<T> {
+    func loadMore<T>(request: Api.Request<T>) -> LoadMoreModel<T> {
         return LoadMoreModel(apiRequest: request)
     }
 

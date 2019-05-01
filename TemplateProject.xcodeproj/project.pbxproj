@@ -21,10 +21,12 @@
 		4593604C226E3DA000F5DDB4 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4593604B226E3DA000F5DDB4 /* RxTest.framework */; };
 		4593604D226E3DA700F5DDB4 /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4593604B226E3DA000F5DDB4 /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45936050226E5A2800F5DDB4 /* NetworkRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593604F226E5A2800F5DDB4 /* NetworkRecorder.swift */; };
-		45936052226E5A6900F5DDB4 /* RxEvent+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45936051226E5A6900F5DDB4 /* RxEvent+Equatable.swift */; };
 		45936055226E5AAC00F5DDB4 /* ApiResponseStream+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45936054226E5AAC00F5DDB4 /* ApiResponseStream+Equatable.swift */; };
 		45936058226E5B0700F5DDB4 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45936057226E5B0700F5DDB4 /* TestError.swift */; };
 		4593605A226E5B3C00F5DDB4 /* ClosureRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45936059226E5B3C00F5DDB4 /* ClosureRecorder.swift */; };
+		45A4F4852279763A007489F9 /* ApiResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A4F4842279763A007489F9 /* ApiResultTest.swift */; };
+		45A4F48722797AE8007489F9 /* Observable+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A4F48622797AE8007489F9 /* Observable+Result.swift */; };
+		45A4F48922797B04007489F9 /* ObservableResultTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A4F48822797B04007489F9 /* ObservableResultTest.swift */; };
 		45E4E2B9218F063E00BC87EC /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E4E2B7218F063E00BC87EC /* Quick.framework */; };
 		45E4E2BA218F063E00BC87EC /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E4E2B8218F063E00BC87EC /* Nimble.framework */; };
 		45E4E2BC218F066800BC87EC /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45E4E2B8218F063E00BC87EC /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -40,7 +42,6 @@
 		45E754F8218E1DC600131C9A /* RxAtomic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E754F3218E1DC600131C9A /* RxAtomic.framework */; };
 		45E754F9218E1DC600131C9A /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E754F4218E1DC600131C9A /* RxCocoa.framework */; };
 		45E754FA218E1DC600131C9A /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E754F5218E1DC600131C9A /* RxSwift.framework */; };
-		45E754FD218E1E9100131C9A /* ApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E754FC218E1E9100131C9A /* ApiConfig.swift */; };
 		45E754FF218E1EA500131C9A /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E754FE218E1EA500131C9A /* Api.swift */; };
 		45E75501218E1EC400131C9A /* Api+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E75500218E1EC400131C9A /* Api+Rx.swift */; };
 		45E75513218E21F800131C9A /* StateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E75512218E21F800131C9A /* StateProvider.swift */; };
@@ -102,10 +103,12 @@
 		45936049226E2AAE00F5DDB4 /* ApiRxTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRxTest.swift; sourceTree = "<group>"; };
 		4593604B226E3DA000F5DDB4 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		4593604F226E5A2800F5DDB4 /* NetworkRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRecorder.swift; sourceTree = "<group>"; };
-		45936051226E5A6900F5DDB4 /* RxEvent+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxEvent+Equatable.swift"; sourceTree = "<group>"; };
 		45936054226E5AAC00F5DDB4 /* ApiResponseStream+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApiResponseStream+Equatable.swift"; sourceTree = "<group>"; };
 		45936057226E5B0700F5DDB4 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		45936059226E5B3C00F5DDB4 /* ClosureRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureRecorder.swift; sourceTree = "<group>"; };
+		45A4F4842279763A007489F9 /* ApiResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiResultTest.swift; sourceTree = "<group>"; };
+		45A4F48622797AE8007489F9 /* Observable+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Result.swift"; sourceTree = "<group>"; };
+		45A4F48822797B04007489F9 /* ObservableResultTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableResultTest.swift; sourceTree = "<group>"; };
 		45E4E2B7218F063E00BC87EC /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		45E4E2B8218F063E00BC87EC /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		45E754B5218E179100131C9A /* TemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +126,6 @@
 		45E754F3218E1DC600131C9A /* RxAtomic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAtomic.framework; path = Carthage/Build/iOS/RxAtomic.framework; sourceTree = "<group>"; };
 		45E754F4218E1DC600131C9A /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		45E754F5218E1DC600131C9A /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		45E754FC218E1E9100131C9A /* ApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfig.swift; sourceTree = "<group>"; };
 		45E754FE218E1EA500131C9A /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		45E75500218E1EC400131C9A /* Api+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Api+Rx.swift"; sourceTree = "<group>"; };
 		45E75512218E21F800131C9A /* StateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateProvider.swift; sourceTree = "<group>"; };
@@ -191,6 +193,8 @@
 				451BDE912252820C004C37DE /* ApiTest.swift */,
 				45936046226DA8B500F5DDB4 /* BasicUrlRequestFactoryTest.swift */,
 				45936049226E2AAE00F5DDB4 /* ApiRxTest.swift */,
+				45A4F4842279763A007489F9 /* ApiResultTest.swift */,
+				45A4F48822797B04007489F9 /* ObservableResultTest.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -225,7 +229,6 @@
 		45936053226E5A9100F5DDB4 /* Equatable */ = {
 			isa = PBXGroup;
 			children = (
-				45936051226E5A6900F5DDB4 /* RxEvent+Equatable.swift */,
 				45936054226E5AAC00F5DDB4 /* ApiResponseStream+Equatable.swift */,
 			);
 			path = Equatable;
@@ -337,10 +340,10 @@
 		45E754EF218E1D5200131C9A /* Api */ = {
 			isa = PBXGroup;
 			children = (
-				45E754FC218E1E9100131C9A /* ApiConfig.swift */,
 				45E754FE218E1EA500131C9A /* Api.swift */,
 				45E75500218E1EC400131C9A /* Api+Rx.swift */,
 				455F65792258A22F008B6B6B /* UrlRequestFactory.swift */,
+				45A4F48622797AE8007489F9 /* Observable+Result.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -666,12 +669,12 @@
 				45E75501218E1EC400131C9A /* Api+Rx.swift in Sources */,
 				45E75534218E228400131C9A /* LoadMoreItemController.swift in Sources */,
 				45E7553B218E228400131C9A /* OfflineItemController.swift in Sources */,
-				45E754FD218E1E9100131C9A /* ApiConfig.swift in Sources */,
 				45E75536218E228400131C9A /* LoadingModel.swift in Sources */,
 				455F657A2258A22F008B6B6B /* UrlRequestFactory.swift in Sources */,
 				45E75530218E228400131C9A /* EmptyModelSectionController.swift in Sources */,
 				45E7552F218E228400131C9A /* ErrorModel.swift in Sources */,
 				45E75532218E228400131C9A /* EmptyViewCell.swift in Sources */,
+				45A4F48722797AE8007489F9 /* Observable+Result.swift in Sources */,
 				45E754B9218E179100131C9A /* AppDelegate.swift in Sources */,
 				45E75513218E21F800131C9A /* StateProvider.swift in Sources */,
 				45E754E1218E184800131C9A /* CollectionParser.swift in Sources */,
@@ -694,13 +697,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				45936055226E5AAC00F5DDB4 /* ApiResponseStream+Equatable.swift in Sources */,
+				45A4F4852279763A007489F9 /* ApiResultTest.swift in Sources */,
 				45EDF4B42266EDA200CC4C00 /* Mock.generated.swift in Sources */,
-				45936052226E5A6900F5DDB4 /* RxEvent+Equatable.swift in Sources */,
 				451BDE922252820C004C37DE /* ApiTest.swift in Sources */,
 				45936058226E5B0700F5DDB4 /* TestError.swift in Sources */,
 				4593604A226E2AAE00F5DDB4 /* ApiRxTest.swift in Sources */,
 				45936047226DA8B500F5DDB4 /* BasicUrlRequestFactoryTest.swift in Sources */,
 				4593605A226E5B3C00F5DDB4 /* ClosureRecorder.swift in Sources */,
+				45A4F48922797B04007489F9 /* ObservableResultTest.swift in Sources */,
 				45936050226E5A2800F5DDB4 /* NetworkRecorder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

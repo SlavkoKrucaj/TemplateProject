@@ -70,33 +70,26 @@ open class HttpLoaderMock: HttpLoader, Mock {
         self.line = line
     }
 
+    public var rx: RxSwift.Reactive<HttpLoader> {
+		get {	invocations.append(.p_rx_get); return __p_rx ?? givenGetterValue(.p_rx_get, "HttpLoaderMock - stub value for rx was not defined") }
+		@available(*, deprecated, message: "Using setters on readonly variables is deprecated, and will be removed in 3.1. Use Given to define stubbed property return value.")
+		set {	__p_rx = newValue }
+	}
+	private var __p_rx: (RxSwift.Reactive<HttpLoader>)?
 
 
 
 
-    open func load<ResultType>(_ request: Api.HTTPRequest<ResultType>,                          stateCallback: @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> URLSessionTask? {
-        addInvocation(.m_load__requeststateCallback_stateCallback(Parameter<Api.HTTPRequest<ResultType>>.value(`request`).wrapAsGeneric(), Parameter<(Api.ResponseStream<ResultType>) -> Void>.value(`stateCallback`).wrapAsGeneric()))
-		let perform = methodPerformValue(.m_load__requeststateCallback_stateCallback(Parameter<Api.HTTPRequest<ResultType>>.value(`request`).wrapAsGeneric(), Parameter<(Api.ResponseStream<ResultType>) -> Void>.value(`stateCallback`).wrapAsGeneric())) as? (Api.HTTPRequest<ResultType>, @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> Void
+
+    open func load<ResultType>(_ request: Api.Request<ResultType>,                          stateCallback: @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> URLSessionTask? {
+        addInvocation(.m_load__requeststateCallback_stateCallback(Parameter<Api.Request<ResultType>>.value(`request`).wrapAsGeneric(), Parameter<(Api.ResponseStream<ResultType>) -> Void>.value(`stateCallback`).wrapAsGeneric()))
+		let perform = methodPerformValue(.m_load__requeststateCallback_stateCallback(Parameter<Api.Request<ResultType>>.value(`request`).wrapAsGeneric(), Parameter<(Api.ResponseStream<ResultType>) -> Void>.value(`stateCallback`).wrapAsGeneric())) as? (Api.Request<ResultType>, @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> Void
 		perform?(`request`, `stateCallback`)
 		var __value: URLSessionTask? = nil
 		do {
-		    __value = try methodReturnValue(.m_load__requeststateCallback_stateCallback(Parameter<Api.HTTPRequest<ResultType>>.value(`request`).wrapAsGeneric(), Parameter<(Api.ResponseStream<ResultType>) -> Void>.value(`stateCallback`).wrapAsGeneric())).casted()
+		    __value = try methodReturnValue(.m_load__requeststateCallback_stateCallback(Parameter<Api.Request<ResultType>>.value(`request`).wrapAsGeneric(), Parameter<(Api.ResponseStream<ResultType>) -> Void>.value(`stateCallback`).wrapAsGeneric())).casted()
 		} catch {
 			// do nothing
-		}
-		return __value
-    }
-
-    open func rx_load<T>(request: Api.HTTPRequest<T>) -> Observable<Api.ResponseStream<T >> {
-        addInvocation(.m_rxload__request_request(Parameter<Api.HTTPRequest<T>>.value(`request`).wrapAsGeneric()))
-		let perform = methodPerformValue(.m_rxload__request_request(Parameter<Api.HTTPRequest<T>>.value(`request`).wrapAsGeneric())) as? (Api.HTTPRequest<T>) -> Void
-		perform?(`request`)
-		var __value: Observable<Api.ResponseStream<T >>
-		do {
-		    __value = try methodReturnValue(.m_rxload__request_request(Parameter<Api.HTTPRequest<T>>.value(`request`).wrapAsGeneric())).casted()
-		} catch {
-			onFatalFailure("Stub return value not specified for rx_load<T>(request: Api.HTTPRequest<T>). Use given")
-			Failure("Stub return value not specified for rx_load<T>(request: Api.HTTPRequest<T>). Use given")
 		}
 		return __value
     }
@@ -104,7 +97,7 @@ open class HttpLoaderMock: HttpLoader, Mock {
 
     fileprivate enum MethodType {
         case m_load__requeststateCallback_stateCallback(Parameter<GenericAttribute>, Parameter<GenericAttribute>)
-        case m_rxload__request_request(Parameter<GenericAttribute>)
+        case p_rx_get
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
@@ -112,9 +105,7 @@ open class HttpLoaderMock: HttpLoader, Mock {
                 guard Parameter.compare(lhs: lhsRequest, rhs: rhsRequest, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsStatecallback, rhs: rhsStatecallback, with: matcher) else { return false } 
                 return true 
-            case (.m_rxload__request_request(let lhsRequest), .m_rxload__request_request(let rhsRequest)):
-                guard Parameter.compare(lhs: lhsRequest, rhs: rhsRequest, with: matcher) else { return false } 
-                return true 
+            case (.p_rx_get,.p_rx_get): return true
             default: return false
             }
         }
@@ -122,7 +113,7 @@ open class HttpLoaderMock: HttpLoader, Mock {
         func intValue() -> Int {
             switch self {
             case let .m_load__requeststateCallback_stateCallback(p0, p1): return p0.intValue + p1.intValue
-            case let .m_rxload__request_request(p0): return p0.intValue
+            case .p_rx_get: return 0
             }
         }
     }
@@ -135,24 +126,17 @@ open class HttpLoaderMock: HttpLoader, Mock {
             super.init(products)
         }
 
+        public static func rx(getter defaultValue: RxSwift.Reactive<HttpLoader>...) -> PropertyStub {
+            return Given(method: .p_rx_get, products: defaultValue.map({ StubProduct.return($0 as Any) }))
+        }
 
-        public static func load<ResultType>(_ request: Parameter<Api.HTTPRequest<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>, willReturn: URLSessionTask?...) -> MethodStub {
+        public static func load<ResultType>(_ request: Parameter<Api.Request<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>, willReturn: URLSessionTask?...) -> MethodStub {
             return Given(method: .m_load__requeststateCallback_stateCallback(`request`.wrapAsGeneric(), `stateCallback`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        public static func rx_load<T>(request: Parameter<Api.HTTPRequest<T>>, willReturn: Observable<Api.ResponseStream<T >>...) -> MethodStub {
-            return Given(method: .m_rxload__request_request(`request`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
-        }
-        public static func load<ResultType>(_ request: Parameter<Api.HTTPRequest<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>, willProduce: (Stubber<URLSessionTask?>) -> Void) -> MethodStub {
+        public static func load<ResultType>(_ request: Parameter<Api.Request<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>, willProduce: (Stubber<URLSessionTask?>) -> Void) -> MethodStub {
             let willReturn: [URLSessionTask?] = []
 			let given: Given = { return Given(method: .m_load__requeststateCallback_stateCallback(`request`.wrapAsGeneric(), `stateCallback`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (URLSessionTask?).self)
-			willProduce(stubber)
-			return given
-        }
-        public static func rx_load<T>(request: Parameter<Api.HTTPRequest<T>>, willProduce: (Stubber<Observable<Api.ResponseStream<T >>>) -> Void) -> MethodStub {
-            let willReturn: [Observable<Api.ResponseStream<T >>] = []
-			let given: Given = { return Given(method: .m_rxload__request_request(`request`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
-			let stubber = given.stub(for: (Observable<Api.ResponseStream<T >>).self)
 			willProduce(stubber)
 			return given
         }
@@ -161,19 +145,16 @@ open class HttpLoaderMock: HttpLoader, Mock {
     public struct Verify {
         fileprivate var method: MethodType
 
-        public static func load<ResultType>(_ request: Parameter<Api.HTTPRequest<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>) -> Verify { return Verify(method: .m_load__requeststateCallback_stateCallback(`request`.wrapAsGeneric(), `stateCallback`.wrapAsGeneric()))}
-        public static func rx_load<T>(request: Parameter<Api.HTTPRequest<T>>) -> Verify { return Verify(method: .m_rxload__request_request(`request`.wrapAsGeneric()))}
+        public static func load<ResultType>(_ request: Parameter<Api.Request<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>) -> Verify { return Verify(method: .m_load__requeststateCallback_stateCallback(`request`.wrapAsGeneric(), `stateCallback`.wrapAsGeneric()))}
+        public static var rx: Verify { return Verify(method: .p_rx_get) }
     }
 
     public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        public static func load<ResultType>(_ request: Parameter<Api.HTTPRequest<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>, perform: @escaping (Api.HTTPRequest<ResultType>, @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> Void) -> Perform {
+        public static func load<ResultType>(_ request: Parameter<Api.Request<ResultType>>, stateCallback: Parameter<(Api.ResponseStream<ResultType>) -> Void>, perform: @escaping (Api.Request<ResultType>, @escaping ((Api.ResponseStream<ResultType>) -> Void)) -> Void) -> Perform {
             return Perform(method: .m_load__requeststateCallback_stateCallback(`request`.wrapAsGeneric(), `stateCallback`.wrapAsGeneric()), performs: perform)
-        }
-        public static func rx_load<T>(request: Parameter<Api.HTTPRequest<T>>, perform: @escaping (Api.HTTPRequest<T>) -> Void) -> Perform {
-            return Perform(method: .m_rxload__request_request(`request`.wrapAsGeneric()), performs: perform)
         }
     }
 

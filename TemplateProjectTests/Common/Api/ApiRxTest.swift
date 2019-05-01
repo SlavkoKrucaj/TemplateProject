@@ -10,7 +10,7 @@ import OHHTTPStubs
 //swiftlint:disable line_length
 //swiftlint:disable function_body_length
 
-class ApiRxTest: QuickSpec {
+final class ApiRxTest: QuickSpec {
     override func spec() {
         var subject: Api!
         var requestFactory: UrlRequestFactoryMock!
@@ -37,7 +37,7 @@ class ApiRxTest: QuickSpec {
                         }
 
                         context("when parser not set", {
-                            let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl)
+                            let request: Api.Request<String> = Api.Request.get(url: exampleUrl)
 
                             it("should propagate loading and correct error", closure: {
                                 let networkRecorder = NetworkRecorder<Api.ResponseStream<String>>(expectedEvents: [
@@ -45,14 +45,14 @@ class ApiRxTest: QuickSpec {
                                     .next(.error(.parserNotSet)),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
                         })
 
                         context("when parsing successful", {
-                            let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl, headers: [:], parser: { _, _ in
+                            let request: Api.Request<String> = Api.Request.get(url: exampleUrl, headers: [:], parser: { _, _ in
                                 return .empty
                             })
 
@@ -62,14 +62,14 @@ class ApiRxTest: QuickSpec {
                                     .next(.success(.empty)),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
                         })
 
                         context("when parsing throws", {
-                            let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl, headers: [:], parser: { _, _ in
+                            let request: Api.Request<String> = Api.Request.get(url: exampleUrl, headers: [:], parser: { _, _ in
                                 throw Api.ApiError.parsingFailure(TestError.test)
                             })
 
@@ -79,7 +79,7 @@ class ApiRxTest: QuickSpec {
                                     .next(.error(Api.ApiError.parsingFailure(TestError.test))),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
@@ -91,7 +91,7 @@ class ApiRxTest: QuickSpec {
                     })
 
                     describe("network error", {
-                        let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl)
+                        let request: Api.Request<String> = Api.Request.get(url: exampleUrl)
 
                         context("when offline", {
                             beforeEach {
@@ -107,7 +107,7 @@ class ApiRxTest: QuickSpec {
                                     .next(.offline),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
@@ -131,7 +131,7 @@ class ApiRxTest: QuickSpec {
                                     .next(.actionableError(.generic(NSURLErrorTimedOut), request)),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
@@ -154,7 +154,7 @@ class ApiRxTest: QuickSpec {
                                     .next(.error(.client(404))),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
@@ -177,7 +177,7 @@ class ApiRxTest: QuickSpec {
                                     .next(.actionableError(.server(500), request)),
                                     .completed
                                 ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })
@@ -200,7 +200,7 @@ class ApiRxTest: QuickSpec {
                                     .next(.actionableError(.unknown, request)),
                                     .completed
                                     ])
-                                subject.rx_load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
+                                subject.rx.load(request: request).subscribe(networkRecorder).disposed(by: disposeBag)
 
                                 self.wait(for: [networkRecorder.expectation], timeout: 5)
                             })

@@ -1,15 +1,16 @@
 import XCTest
 
-@testable import TemplateProject
 import Quick
 import Nimble
 import OHHTTPStubs
 import SwiftyMocky
 
+import TemplateProject
+
 //swiftlint:disable line_length
 //swiftlint:disable function_body_length
 
-class ApiTest: QuickSpec {
+final class ApiTest: QuickSpec {
     override func spec() {
         var subject: Api!
         var requestFactory: UrlRequestFactoryMock!
@@ -35,7 +36,7 @@ class ApiTest: QuickSpec {
                         }
 
                         context("when parser not set", {
-                            let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl)
+                            let request: Api.Request<String> = Api.Request.get(url: exampleUrl)
 
                             it("should propagate loading and correct error", closure: {
                                 let recorder = ClosureRecorder<Api.ResponseStream<String>>(values: [
@@ -52,7 +53,7 @@ class ApiTest: QuickSpec {
                         })
 
                         context("when parsing successful", {
-                            let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl, headers: [:], parser: { _, _ in
+                            let request: Api.Request<String> = Api.Request.get(url: exampleUrl, headers: [:], parser: { _, _ in
                                 return .empty
                             })
 
@@ -71,7 +72,7 @@ class ApiTest: QuickSpec {
                         })
 
                         context("when parsing throws", {
-                            let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl, headers: [:], parser: { _, _ in
+                            let request: Api.Request<String> = Api.Request.get(url: exampleUrl, headers: [:], parser: { _, _ in
                                 throw Api.ApiError.parsingFailure(TestError.test)
                             })
 
@@ -95,7 +96,7 @@ class ApiTest: QuickSpec {
                     })
 
                     describe("network error", {
-                        let request: Api.HTTPRequest<String> = Api.HTTPRequest.get(url: exampleUrl)
+                        let request: Api.Request<String> = Api.Request.get(url: exampleUrl)
 
                         context("when offline", {
                             beforeEach {

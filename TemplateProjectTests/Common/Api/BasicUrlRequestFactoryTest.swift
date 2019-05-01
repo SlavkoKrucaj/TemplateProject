@@ -4,7 +4,7 @@ import XCTest
 import Quick
 import Nimble
 
-class BasicUrlRequestFactoryTest: QuickSpec {
+final class BasicUrlRequestFactoryTest: QuickSpec {
     override func spec() {
         let subject = BasicUrlRequestFactory()
 
