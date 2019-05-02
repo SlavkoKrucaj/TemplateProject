@@ -1,7 +1,7 @@
 import Foundation
 import IGListKit
 
-public class EmptyModel: NSObject, ListDiffable {
+public final class EmptyModel: NSObject, ListDiffable {
     let title: String
     let message: String
 

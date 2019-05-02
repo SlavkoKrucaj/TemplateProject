@@ -274,16 +274,16 @@ open class StateProviderMock: StateProvider, Mock {
 		return __value
     }
 
-    open func offline(imageName: String, title: String, message: String) -> OfflineModel {
-        addInvocation(.m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`title`), Parameter<String>.value(`message`)))
-		let perform = methodPerformValue(.m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`title`), Parameter<String>.value(`message`))) as? (String, String, String) -> Void
-		perform?(`imageName`, `title`, `message`)
+    open func offline(image: UIImage, title: String, message: String) -> OfflineModel {
+        addInvocation(.m_offline__image_imagetitle_titlemessage_message(Parameter<UIImage>.value(`image`), Parameter<String>.value(`title`), Parameter<String>.value(`message`)))
+		let perform = methodPerformValue(.m_offline__image_imagetitle_titlemessage_message(Parameter<UIImage>.value(`image`), Parameter<String>.value(`title`), Parameter<String>.value(`message`))) as? (UIImage, String, String) -> Void
+		perform?(`image`, `title`, `message`)
 		var __value: OfflineModel
 		do {
-		    __value = try methodReturnValue(.m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`title`), Parameter<String>.value(`message`))).casted()
+		    __value = try methodReturnValue(.m_offline__image_imagetitle_titlemessage_message(Parameter<UIImage>.value(`image`), Parameter<String>.value(`title`), Parameter<String>.value(`message`))).casted()
 		} catch {
-			onFatalFailure("Stub return value not specified for offline(imageName: String, title: String, message: String). Use given")
-			Failure("Stub return value not specified for offline(imageName: String, title: String, message: String). Use given")
+			onFatalFailure("Stub return value not specified for offline(image: UIImage, title: String, message: String). Use given")
+			Failure("Stub return value not specified for offline(image: UIImage, title: String, message: String). Use given")
 		}
 		return __value
     }
@@ -302,16 +302,16 @@ open class StateProviderMock: StateProvider, Mock {
 		return __value
     }
 
-    open func error(imageName: String, message: String) -> ErrorModel {
-        addInvocation(.m_error__imageName_imageNamemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`message`)))
-		let perform = methodPerformValue(.m_error__imageName_imageNamemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`message`))) as? (String, String) -> Void
-		perform?(`imageName`, `message`)
+    open func error(image: UIImage, message: String) -> ErrorModel {
+        addInvocation(.m_error__image_imagemessage_message(Parameter<UIImage>.value(`image`), Parameter<String>.value(`message`)))
+		let perform = methodPerformValue(.m_error__image_imagemessage_message(Parameter<UIImage>.value(`image`), Parameter<String>.value(`message`))) as? (UIImage, String) -> Void
+		perform?(`image`, `message`)
 		var __value: ErrorModel
 		do {
-		    __value = try methodReturnValue(.m_error__imageName_imageNamemessage_message(Parameter<String>.value(`imageName`), Parameter<String>.value(`message`))).casted()
+		    __value = try methodReturnValue(.m_error__image_imagemessage_message(Parameter<UIImage>.value(`image`), Parameter<String>.value(`message`))).casted()
 		} catch {
-			onFatalFailure("Stub return value not specified for error(imageName: String, message: String). Use given")
-			Failure("Stub return value not specified for error(imageName: String, message: String). Use given")
+			onFatalFailure("Stub return value not specified for error(image: UIImage, message: String). Use given")
+			Failure("Stub return value not specified for error(image: UIImage, message: String). Use given")
 		}
 		return __value
     }
@@ -320,9 +320,9 @@ open class StateProviderMock: StateProvider, Mock {
     fileprivate enum MethodType {
         case m_empty__title_titlemessage_message(Parameter<String>, Parameter<String>)
         case m_loading
-        case m_offline__imageName_imageNametitle_titlemessage_message(Parameter<String>, Parameter<String>, Parameter<String>)
+        case m_offline__image_imagetitle_titlemessage_message(Parameter<UIImage>, Parameter<String>, Parameter<String>)
         case m_loadMore__request_request(Parameter<GenericAttribute>)
-        case m_error__imageName_imageNamemessage_message(Parameter<String>, Parameter<String>)
+        case m_error__image_imagemessage_message(Parameter<UIImage>, Parameter<String>)
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) {
@@ -332,16 +332,16 @@ open class StateProviderMock: StateProvider, Mock {
                 return true 
             case (.m_loading, .m_loading):
                 return true 
-            case (.m_offline__imageName_imageNametitle_titlemessage_message(let lhsImagename, let lhsTitle, let lhsMessage), .m_offline__imageName_imageNametitle_titlemessage_message(let rhsImagename, let rhsTitle, let rhsMessage)):
-                guard Parameter.compare(lhs: lhsImagename, rhs: rhsImagename, with: matcher) else { return false } 
+            case (.m_offline__image_imagetitle_titlemessage_message(let lhsImage, let lhsTitle, let lhsMessage), .m_offline__image_imagetitle_titlemessage_message(let rhsImage, let rhsTitle, let rhsMessage)):
+                guard Parameter.compare(lhs: lhsImage, rhs: rhsImage, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsTitle, rhs: rhsTitle, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsMessage, rhs: rhsMessage, with: matcher) else { return false } 
                 return true 
             case (.m_loadMore__request_request(let lhsRequest), .m_loadMore__request_request(let rhsRequest)):
                 guard Parameter.compare(lhs: lhsRequest, rhs: rhsRequest, with: matcher) else { return false } 
                 return true 
-            case (.m_error__imageName_imageNamemessage_message(let lhsImagename, let lhsMessage), .m_error__imageName_imageNamemessage_message(let rhsImagename, let rhsMessage)):
-                guard Parameter.compare(lhs: lhsImagename, rhs: rhsImagename, with: matcher) else { return false } 
+            case (.m_error__image_imagemessage_message(let lhsImage, let lhsMessage), .m_error__image_imagemessage_message(let rhsImage, let rhsMessage)):
+                guard Parameter.compare(lhs: lhsImage, rhs: rhsImage, with: matcher) else { return false } 
                 guard Parameter.compare(lhs: lhsMessage, rhs: rhsMessage, with: matcher) else { return false } 
                 return true 
             default: return false
@@ -352,9 +352,9 @@ open class StateProviderMock: StateProvider, Mock {
             switch self {
             case let .m_empty__title_titlemessage_message(p0, p1): return p0.intValue + p1.intValue
             case .m_loading: return 0
-            case let .m_offline__imageName_imageNametitle_titlemessage_message(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
+            case let .m_offline__image_imagetitle_titlemessage_message(p0, p1, p2): return p0.intValue + p1.intValue + p2.intValue
             case let .m_loadMore__request_request(p0): return p0.intValue
-            case let .m_error__imageName_imageNamemessage_message(p0, p1): return p0.intValue + p1.intValue
+            case let .m_error__image_imagemessage_message(p0, p1): return p0.intValue + p1.intValue
             }
         }
     }
@@ -374,14 +374,14 @@ open class StateProviderMock: StateProvider, Mock {
         public static func loading(willReturn: LoadingModel...) -> MethodStub {
             return Given(method: .m_loading, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>, willReturn: OfflineModel...) -> MethodStub {
-            return Given(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        public static func offline(image: Parameter<UIImage>, title: Parameter<String>, message: Parameter<String>, willReturn: OfflineModel...) -> MethodStub {
+            return Given(method: .m_offline__image_imagetitle_titlemessage_message(`image`, `title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
         public static func loadMore<T>(request: Parameter<Api.Request<T>>, willReturn: LoadMoreModel<T>...) -> MethodStub {
             return Given(method: .m_loadMore__request_request(`request`.wrapAsGeneric()), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        public static func error(imageName: Parameter<String>, message: Parameter<String>, willReturn: ErrorModel...) -> MethodStub {
-            return Given(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
+        public static func error(image: Parameter<UIImage>, message: Parameter<String>, willReturn: ErrorModel...) -> MethodStub {
+            return Given(method: .m_error__image_imagemessage_message(`image`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
         public static func empty(title: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<EmptyModel>) -> Void) -> MethodStub {
             let willReturn: [EmptyModel] = []
@@ -397,9 +397,9 @@ open class StateProviderMock: StateProvider, Mock {
 			willProduce(stubber)
 			return given
         }
-        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<OfflineModel>) -> Void) -> MethodStub {
+        public static func offline(image: Parameter<UIImage>, title: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<OfflineModel>) -> Void) -> MethodStub {
             let willReturn: [OfflineModel] = []
-			let given: Given = { return Given(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let given: Given = { return Given(method: .m_offline__image_imagetitle_titlemessage_message(`image`, `title`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (OfflineModel).self)
 			willProduce(stubber)
 			return given
@@ -411,9 +411,9 @@ open class StateProviderMock: StateProvider, Mock {
 			willProduce(stubber)
 			return given
         }
-        public static func error(imageName: Parameter<String>, message: Parameter<String>, willProduce: (Stubber<ErrorModel>) -> Void) -> MethodStub {
+        public static func error(image: Parameter<UIImage>, message: Parameter<String>, willProduce: (Stubber<ErrorModel>) -> Void) -> MethodStub {
             let willReturn: [ErrorModel] = []
-			let given: Given = { return Given(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let given: Given = { return Given(method: .m_error__image_imagemessage_message(`image`, `message`), products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (ErrorModel).self)
 			willProduce(stubber)
 			return given
@@ -425,9 +425,9 @@ open class StateProviderMock: StateProvider, Mock {
 
         public static func empty(title: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_empty__title_titlemessage_message(`title`, `message`))}
         public static func loading() -> Verify { return Verify(method: .m_loading)}
-        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`))}
+        public static func offline(image: Parameter<UIImage>, title: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_offline__image_imagetitle_titlemessage_message(`image`, `title`, `message`))}
         public static func loadMore<T>(request: Parameter<Api.Request<T>>) -> Verify { return Verify(method: .m_loadMore__request_request(`request`.wrapAsGeneric()))}
-        public static func error(imageName: Parameter<String>, message: Parameter<String>) -> Verify { return Verify(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`))}
+        public static func error(image: Parameter<UIImage>, message: Parameter<String>) -> Verify { return Verify(method: .m_error__image_imagemessage_message(`image`, `message`))}
     }
 
     public struct Perform {
@@ -440,14 +440,14 @@ open class StateProviderMock: StateProvider, Mock {
         public static func loading(perform: @escaping () -> Void) -> Perform {
             return Perform(method: .m_loading, performs: perform)
         }
-        public static func offline(imageName: Parameter<String>, title: Parameter<String>, message: Parameter<String>, perform: @escaping (String, String, String) -> Void) -> Perform {
-            return Perform(method: .m_offline__imageName_imageNametitle_titlemessage_message(`imageName`, `title`, `message`), performs: perform)
+        public static func offline(image: Parameter<UIImage>, title: Parameter<String>, message: Parameter<String>, perform: @escaping (UIImage, String, String) -> Void) -> Perform {
+            return Perform(method: .m_offline__image_imagetitle_titlemessage_message(`image`, `title`, `message`), performs: perform)
         }
         public static func loadMore<T>(request: Parameter<Api.Request<T>>, perform: @escaping (Api.Request<T>) -> Void) -> Perform {
             return Perform(method: .m_loadMore__request_request(`request`.wrapAsGeneric()), performs: perform)
         }
-        public static func error(imageName: Parameter<String>, message: Parameter<String>, perform: @escaping (String, String) -> Void) -> Perform {
-            return Perform(method: .m_error__imageName_imageNamemessage_message(`imageName`, `message`), performs: perform)
+        public static func error(image: Parameter<UIImage>, message: Parameter<String>, perform: @escaping (UIImage, String) -> Void) -> Perform {
+            return Perform(method: .m_error__image_imagemessage_message(`image`, `message`), performs: perform)
         }
     }
 

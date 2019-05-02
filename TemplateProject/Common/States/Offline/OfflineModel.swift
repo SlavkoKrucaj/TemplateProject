@@ -3,11 +3,11 @@ import IGListKit
 import UIKit
 
 final public class OfflineModel: NSObject, ListDiffable {
-    let image: String
+    let image: UIImage
     let title: String
     let message: String
 
-    public init(image: String, title: String, message: String) {
+    public init(image: UIImage, title: String, message: String) {
         self.image = image
         self.title = title
         self.message = message

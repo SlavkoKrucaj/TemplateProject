@@ -49,8 +49,8 @@ public final class Api: HttpLoader {
         let parser: ((Data, Request<T>) throws -> Result<T>)?
 
         public static func get(url: URL,
-                        headers: [String: String] = [:],
-                        parser: ((Data, Request<T>) throws -> Result<T>)? = nil) -> Request {
+                               headers: [String: String] = [:],
+                               parser: ((Data, Request<T>) throws -> Result<T>)? = nil) -> Request {
             return Request(method: "GET", url: url, headers: headers, body: nil, parser: parser)
         }
 

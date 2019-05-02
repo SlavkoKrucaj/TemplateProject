@@ -1,12 +1,13 @@
 import Foundation
+import UIKit
 
 //sourcery: AutoMockable
 public protocol StateProvider {
     func empty(title: String, message: String) -> EmptyModel
     func loading() -> LoadingModel
-    func offline(imageName: String, title: String, message: String) -> OfflineModel
+    func offline(image: UIImage, title: String, message: String) -> OfflineModel
     func loadMore<T>(request: Api.Request<T>) -> LoadMoreModel<T>
-    func error(imageName: String, message: String) -> ErrorModel
+    func error(image: UIImage, message: String) -> ErrorModel
 }
 
 struct BasicStateProvider: StateProvider {
@@ -18,8 +19,8 @@ struct BasicStateProvider: StateProvider {
         return LoadingModel()
     }
 
-    func offline(imageName: String, title: String, message: String) -> OfflineModel {
-        return OfflineModel(image: imageName,
+    func offline(image: UIImage, title: String, message: String) -> OfflineModel {
+        return OfflineModel(image: image,
                             title: title,
                             message: message)
     }
@@ -28,8 +29,8 @@ struct BasicStateProvider: StateProvider {
         return LoadMoreModel(apiRequest: request)
     }
 
-    func error(imageName: String, message: String) -> ErrorModel {
-        return ErrorModel(image: imageName,
+    func error(image: UIImage, message: String) -> ErrorModel {
+        return ErrorModel(image: image,
                           message: message)
     }
 }

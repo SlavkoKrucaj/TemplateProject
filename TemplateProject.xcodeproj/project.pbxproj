@@ -12,7 +12,6 @@
 		451BDE9C2252B8B5004C37DE /* SwiftyMocky.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 451BDE9A2252B8AB004C37DE /* SwiftyMocky.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		451BDE9F225411EF004C37DE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451BDE9D225411EE004C37DE /* Crashlytics.framework */; };
 		451BDEA0225411EF004C37DE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451BDE9E225411EF004C37DE /* Fabric.framework */; };
-		453B462C218EF931005D0502 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453B462B218EF931005D0502 /* StringExtensions.swift */; };
 		455F657A2258A22F008B6B6B /* UrlRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F65792258A22F008B6B6B /* UrlRequestFactory.swift */; };
 		45936045226DA4A700F5DDB4 /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45936044226DA4A700F5DDB4 /* OHHTTPStubs.framework */; };
 		45936047226DA8B500F5DDB4 /* BasicUrlRequestFactoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45936046226DA8B500F5DDB4 /* BasicUrlRequestFactoryTest.swift */; };
@@ -35,7 +34,6 @@
 		45E754BE218E179200131C9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E754BC218E179200131C9A /* Main.storyboard */; };
 		45E754C0218E179300131C9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45E754BF218E179300131C9A /* Assets.xcassets */; };
 		45E754C3218E179300131C9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45E754C1218E179300131C9A /* LaunchScreen.storyboard */; };
-		45E754E1218E184800131C9A /* CollectionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E754E0218E184800131C9A /* CollectionParser.swift */; };
 		45E754EB218E1C8700131C9A /* BaseWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E754EA218E1C8700131C9A /* BaseWireframe.swift */; };
 		45E754F6218E1DC600131C9A /* IGListKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E754F1218E1DC600131C9A /* IGListKit.framework */; };
 		45E754F7218E1DC600131C9A /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E754F2218E1DC600131C9A /* RxBlocking.framework */; };
@@ -96,7 +94,6 @@
 		451BDE9A2252B8AB004C37DE /* SwiftyMocky.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyMocky.framework; path = Carthage/Build/iOS/SwiftyMocky.framework; sourceTree = "<group>"; };
 		451BDE9D225411EE004C37DE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
 		451BDE9E225411EF004C37DE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Carthage/Build/iOS/Fabric.framework; sourceTree = "<group>"; };
-		453B462B218EF931005D0502 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		455F65792258A22F008B6B6B /* UrlRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequestFactory.swift; sourceTree = "<group>"; };
 		45936044226DA4A700F5DDB4 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OHHTTPStubs.framework; path = Carthage/Build/iOS/OHHTTPStubs.framework; sourceTree = "<group>"; };
 		45936046226DA8B500F5DDB4 /* BasicUrlRequestFactoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicUrlRequestFactoryTest.swift; sourceTree = "<group>"; };
@@ -119,7 +116,6 @@
 		45E754C4218E179300131C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E754C9218E179300131C9A /* TemplateProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TemplateProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E754CF218E179300131C9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45E754E0218E184800131C9A /* CollectionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionParser.swift; sourceTree = "<group>"; };
 		45E754EA218E1C8700131C9A /* BaseWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWireframe.swift; sourceTree = "<group>"; };
 		45E754F1218E1DC600131C9A /* IGListKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IGListKit.framework; path = Carthage/Build/iOS/IGListKit.framework; sourceTree = "<group>"; };
 		45E754F2218E1DC600131C9A /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
@@ -207,14 +203,6 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		453B462A218EF922005D0502 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				453B462B218EF931005D0502 /* StringExtensions.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		4593604E226E59FF00F5DDB4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,21 +281,11 @@
 		45E754DA218E17F000131C9A /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				453B462A218EF922005D0502 /* Extension */,
 				45E75511218E21ED00131C9A /* States */,
 				45E754EF218E1D5200131C9A /* Api */,
 				45E754E9218E1C6D00131C9A /* Viper */,
-				45E754DF218E183D00131C9A /* Parsers */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		45E754DF218E183D00131C9A /* Parsers */ = {
-			isa = PBXGroup;
-			children = (
-				45E754E0218E184800131C9A /* CollectionParser.swift */,
-			);
-			path = Parsers;
 			sourceTree = "<group>";
 		};
 		45E754E7218E18AA00131C9A /* SupportingFiles */ = {
@@ -677,9 +655,7 @@
 				45A4F48722797AE8007489F9 /* Observable+Result.swift in Sources */,
 				45E754B9218E179100131C9A /* AppDelegate.swift in Sources */,
 				45E75513218E21F800131C9A /* StateProvider.swift in Sources */,
-				45E754E1218E184800131C9A /* CollectionParser.swift in Sources */,
 				45E75537218E228400131C9A /* LoadingSpinnerCell.swift in Sources */,
-				453B462C218EF931005D0502 /* StringExtensions.swift in Sources */,
 				45E75538218E228400131C9A /* LoadingItemController.swift in Sources */,
 				45E75531218E228400131C9A /* EmptyModel.swift in Sources */,
 				45E754EB218E1C8700131C9A /* BaseWireframe.swift in Sources */,

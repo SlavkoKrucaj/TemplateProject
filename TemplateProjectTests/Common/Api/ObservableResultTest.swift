@@ -7,6 +7,8 @@ import RxTest
 
 import TemplateProject
 
+//swiftlint:disable function_body_length
+
 class ObservableResultTest: QuickSpec {
     override func spec() {
         describe("asSingleResult") {

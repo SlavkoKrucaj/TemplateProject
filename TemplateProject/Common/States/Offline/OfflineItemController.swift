@@ -8,7 +8,7 @@ final public class OfflineItemController {
         let configureBlock = { (item: Any, cell: UICollectionViewCell) in
             if let cell = cell as? OfflineViewCell,
                 let item = item as? OfflineModel {
-                cell.image = UIImage(named: item.image)
+                cell.image = item.image
                 cell.title = item.title
                 cell.message = item.message
             }

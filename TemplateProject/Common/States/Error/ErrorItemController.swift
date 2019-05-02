@@ -13,7 +13,7 @@ final public class ErrorItemController: ListSectionController {
             if let cell = cell as? ErrorViewCell,
                 let item = item as? ErrorModel {
                 cell.message = item.message
-                cell.retryButtonImage = UIImage(named: item.image)
+                cell.retryButtonImage = item.image
                 cell.action = { delegate.reload() }
             }
         }
