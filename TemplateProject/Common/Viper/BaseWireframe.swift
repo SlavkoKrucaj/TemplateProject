@@ -6,7 +6,7 @@ public protocol WireframeInterface: class {
     func dismiss(animated: Bool)
 }
 
-public final class BaseWireframe: WireframeInterface {
+public class BaseWireframe: WireframeInterface {
     fileprivate unowned var _viewController: UIViewController
 
     //to retain view controller reference upon first access

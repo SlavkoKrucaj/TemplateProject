@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
 
         let initialController = UINavigationController()
-//        initialController.setRootWireframe(FirstWireframe())
+//        initialController.setRootWireframe(...Wireframe())
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
 

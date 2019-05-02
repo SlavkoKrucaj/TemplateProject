@@ -6,5 +6,10 @@ final class ___VARIABLE_moduleName___ViewController: UIViewController, ___VARIAB
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter.viewDidLoad()
+    }
+
+    func setTitle(title: String) {
+        self.title = title
     }
 }

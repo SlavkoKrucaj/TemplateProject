@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4504B6C6227B66F8008DF569 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504B6C5227B66F8008DF569 /* Translator.swift */; };
+		4504B799227B8691008DF569 /* AnalyticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504B798227B8691008DF569 /* AnalyticsProvider.swift */; };
+		4504B79B227B86EC008DF569 /* DebugAnalyticsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4504B79A227B86EC008DF569 /* DebugAnalyticsProvider.swift */; };
 		451BDE922252820C004C37DE /* ApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451BDE912252820C004C37DE /* ApiTest.swift */; };
 		451BDE9B2252B8AB004C37DE /* SwiftyMocky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451BDE9A2252B8AB004C37DE /* SwiftyMocky.framework */; };
 		451BDE9C2252B8B5004C37DE /* SwiftyMocky.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 451BDE9A2252B8AB004C37DE /* SwiftyMocky.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -90,6 +93,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4504B6C5227B66F8008DF569 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
+		4504B798227B8691008DF569 /* AnalyticsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsProvider.swift; sourceTree = "<group>"; };
+		4504B79A227B86EC008DF569 /* DebugAnalyticsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAnalyticsProvider.swift; sourceTree = "<group>"; };
 		451BDE912252820C004C37DE /* ApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTest.swift; sourceTree = "<group>"; };
 		451BDE9A2252B8AB004C37DE /* SwiftyMocky.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyMocky.framework; path = Carthage/Build/iOS/SwiftyMocky.framework; sourceTree = "<group>"; };
 		451BDE9D225411EE004C37DE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Carthage/Build/iOS/Crashlytics.framework; sourceTree = "<group>"; };
@@ -174,6 +180,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4504B6C4227B66E7008DF569 /* Translation */ = {
+			isa = PBXGroup;
+			children = (
+				4504B6C5227B66F8008DF569 /* Translator.swift */,
+			);
+			path = Translation;
+			sourceTree = "<group>";
+		};
+		4504B797227B862F008DF569 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				4504B798227B8691008DF569 /* AnalyticsProvider.swift */,
+				4504B79A227B86EC008DF569 /* DebugAnalyticsProvider.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 		451BDE8D225281CA004C37DE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +304,8 @@
 		45E754DA218E17F000131C9A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4504B797227B862F008DF569 /* Analytics */,
+				4504B6C4227B66E7008DF569 /* Translation */,
 				45E75511218E21ED00131C9A /* States */,
 				45E754EF218E1D5200131C9A /* Api */,
 				45E754E9218E1C6D00131C9A /* Viper */,
@@ -645,8 +670,10 @@
 			files = (
 				45E754FF218E1EA500131C9A /* Api.swift in Sources */,
 				45E75501218E1EC400131C9A /* Api+Rx.swift in Sources */,
+				4504B6C6227B66F8008DF569 /* Translator.swift in Sources */,
 				45E75534218E228400131C9A /* LoadMoreItemController.swift in Sources */,
 				45E7553B218E228400131C9A /* OfflineItemController.swift in Sources */,
+				4504B799227B8691008DF569 /* AnalyticsProvider.swift in Sources */,
 				45E75536218E228400131C9A /* LoadingModel.swift in Sources */,
 				455F657A2258A22F008B6B6B /* UrlRequestFactory.swift in Sources */,
 				45E75530218E228400131C9A /* EmptyModelSectionController.swift in Sources */,
@@ -659,6 +686,7 @@
 				45E75538218E228400131C9A /* LoadingItemController.swift in Sources */,
 				45E75531218E228400131C9A /* EmptyModel.swift in Sources */,
 				45E754EB218E1C8700131C9A /* BaseWireframe.swift in Sources */,
+				4504B79B227B86EC008DF569 /* DebugAnalyticsProvider.swift in Sources */,
 				45E75533218E228400131C9A /* LoadMoreSpinnerCell.swift in Sources */,
 				45E75539218E228400131C9A /* OfflineModel.swift in Sources */,
 				45E7553A218E228400131C9A /* OfflineViewCell.swift in Sources */,

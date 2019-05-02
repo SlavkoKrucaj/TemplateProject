@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 //sourcery: AutoMockable
-public protocol StateProvider {
+public protocol StateProviderInterface {
     func empty(title: String, message: String) -> EmptyModel
     func loading() -> LoadingModel
     func offline(image: UIImage, title: String, message: String) -> OfflineModel
@@ -10,7 +10,7 @@ public protocol StateProvider {
     func error(image: UIImage, message: String) -> ErrorModel
 }
 
-struct BasicStateProvider: StateProvider {
+struct BasicStateProvider: StateProviderInterface {
     func empty(title: String, message: String) -> EmptyModel {
         return EmptyModel(title: title, message: message)
     }
